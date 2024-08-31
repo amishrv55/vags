@@ -64,5 +64,5 @@ Contact
 For questions or further information, please contact:
 
 Amish Jain
-Email: your-email@example.com
+Email: amishjain2025@u.northwestern.edu
 Project: Veterinary RAG Model
