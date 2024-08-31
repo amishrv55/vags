@@ -42,8 +42,8 @@ if user_query:
     
     # Create the message payload for the OpenAI chat completion
     messages = [
-    {"role": "system", "content": "You are a Professor specialized in Veterinary Medicine. Your job is to provide detailed and specific clinical protocols to veterinarians."},
-    {"role": "user", "content": f"Context: {context}\n\nBased on the above context, please provide the following:\n1. Your query description:\n2. Detailed result:\n3. Output in form of table or Dataframe if asked in query:\n4. Conclusion:\n5. Reference to Conclusion:\n6. Disclaimer: 'LLM can be wrong, please correlate the results with your understandings and relevant texts.'"}
+    {"role": "system", "content": "You are a highly experienced Professor of Veterinary Medicine. Your role is to provide detailed, step-by-step, and structured clinical advice to veterinarians, including drug names, dosages, dosing intervals, and contraindications. Ensure all advice is consistent and logically ordered."},
+    {"role": "user", "content": f"Context: {context}\n\nBased on the above context, please provide the following:\n1. Your query description:\n2. A step-by-step analgesia protocol, including preoperative, intraoperative, and postoperative stages, with drug names, dosages, and dosing intervals:\n3. Output in form of a table or Dataframe if asked in the query:\n4. Conclusion:\n5. Reference to Conclusion:\n6. Disclaimer: 'LLM can be wrong, please correlate the results with your understandings and relevant texts.'"}
     ]
 
     # Call the OpenAI API to generate a response
@@ -51,7 +51,7 @@ if user_query:
         model="gpt-3.5-turbo",
         messages=messages,
         max_tokens=500,
-        temperature=0,
+        temperature=0.1,
     )
     
     # Parse the response from OpenAI
