@@ -10,10 +10,10 @@ import json
 import numpy as np
 from openai import OpenAI
 
-# Set your OpenAI API key
+# Set OpenAI API key
 
 client = OpenAI(
-  api_key=os.environ['OPENAI_API_KEY'],  # this is also the default, it can be omitted
+  api_key=os.environ['OPENAI_API_KEY'],
 )
 
 @st.cache_resource
