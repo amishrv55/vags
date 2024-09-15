@@ -20,3 +20,4 @@ def load_vectors(index_path):
 # Save the FAISS index
 def save_faiss_index(index, filepath):
     faiss.write_index(index, filepath)
+

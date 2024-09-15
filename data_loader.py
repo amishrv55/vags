@@ -5,21 +5,24 @@ from embeddings import create_embeddings
 from datastore import store_vectors, load_vectors, save_faiss_index
 from query import query_vector_store
 import os
+import json
 
 @st.cache_resource
 def get_faiss_index():
-    if os.path.exists('faiss_index.index'):
-        return load_vectors('faiss_index.index')
-    else:
-        documents = load_doc('data')
-        all_text = " ".join([doc.page_content for doc in documents])
-        chunks = chunk_text(all_text, chunk_size=300)
-        embeddings = create_embeddings(chunks)
-        faiss_index = store_vectors(embeddings)
+    documents = load_doc('data')
+    all_text = " ".join([doc.page_content for doc in documents])
+    chunks = chunk_text(all_text, chunk_size=300)
+    embeddings, chunks = create_embeddings(chunks)  # Now we return both embeddings and chunks
+    faiss_index, index_to_chunk_mapping = store_vectors(embeddings, chunks)  # Pass both embeddings and chunks
 
         # Save the FAISS index to disk
-        save_faiss_index(faiss_index, "faiss_index_file.index")
-        return faiss_index
+    save_faiss_index(faiss_index, "faiss_index_file.index")
+    with open('index_to_chunk_mapping.json', 'w') as f:
+            json.dump(index_to_chunk_mapping, f)
+        
+        # Return FAISS index and the mapping of indices to chunks
+    return faiss_index, index_to_chunk_mapping
+
 
 st.title("Veterinary Medicine RAG Application")
 

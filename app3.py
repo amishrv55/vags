@@ -18,7 +18,7 @@ client = OpenAI(
 
 @st.cache_resource
 def load_faiss_and_mapping():
-    faiss_index = load_vectors('faiss_index.index')
+    faiss_index = load_vectors('faiss_index_file.index')
     with open('index_to_chunk_mapping.json', 'r') as f:
         index_to_chunk_mapping = json.load(f)
     return faiss_index, index_to_chunk_mapping
@@ -42,8 +42,9 @@ if user_query:
     
     # Create the message payload for the OpenAI chat completion
     messages = [
-    {"role": "system", "content": "You are a highly experienced Professor of Veterinary Medicine. Your role is to provide detailed, step-by-step, and structured clinical advice to veterinarians, including drug names, dosages, dosing intervals, and contraindications. Ensure all advice is consistent and logically ordered."},
-    {"role": "user", "content": f"Context: {context}\n\nBased on the above context, please provide the following:\n1. Your query description:\n2. A step-by-step analgesia protocol, including preoperative, intraoperative, and postoperative stages, with drug names, dosages, and dosing intervals:\n3. Output in form of a table or Dataframe if asked in the query:\n4. Conclusion:\n5. Reference to Conclusion:\n6. Disclaimer: 'LLM can be wrong, please correlate the results with your understandings and relevant texts.'"}
+    {"role": "system", "content": f"User query,{user_query}:\n.You are a highly experienced Professor of Veterinary Medicine. Your role is to read the context, understand query and  provide detailed, step-by-step, and structured clinical advice to veterinarians, including drug names, dosages, dosing intervals, and contraindications. Ensure all advice is consistent and logically ordered."},
+    {"role": "user", "content": f"Context: {context}\n\nRead the context and extarct relevant information from context to answer the user query.Based on the context provided, please provide the following:\n1. Your query description:\n2. A step-by-step analgesia protocol, including preoperative, intraoperative, and postoperative stages, with drug names, dosages, and dosing intervals:\n4. Reference to analgesia protocol."}
+    
     ]
 
     # Call the OpenAI API to generate a response
@@ -51,7 +52,7 @@ if user_query:
         model="gpt-3.5-turbo",
         messages=messages,
         max_tokens=500,
-        temperature=0.1,
+        temperature=0,
     )
     
     # Parse the response from OpenAI
