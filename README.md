@@ -11,6 +11,7 @@ OpenAI Integration: Uses OpenAI's GPT model to enhance the generation of accurat
 Project Structure
 ```
 ├── app3.py                   # Main application file
+├── data_loader               # Application to create initial faiss index file and mappings.
 ├── chunks.py                 # Module for text chunking
 ├── datastore.py              # Handles storage and retrieval of embeddings and vectors
 ├── embeddings.py             # Functions to create embeddings
