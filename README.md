@@ -9,7 +9,7 @@ User-Friendly Interface: Designed with a simple interface for ease of use by vet
 Customizable Outputs: Generates structured outputs with key information such as protocols, drug dosages, contraindications, and more.
 OpenAI Integration: Uses OpenAI's GPT model to enhance the generation of accurate and contextually relevant advice.
 Project Structure
-'''
+```
 ├── app3.py                   # Main application file
 ├── chunks.py                 # Module for text chunking
 ├── datastore.py              # Handles storage and retrieval of embeddings and vectors
@@ -22,7 +22,7 @@ Project Structure
 ├── faiss_index.index         # FAISS index storing document embeddings
 ├── LICENSE                   # Project license
 
-'''
+```
 Installation
 To run this project, you will need to set up a Python environment with the necessary dependencies.
 
